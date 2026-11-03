@@ -315,6 +315,10 @@ def _is_num(v):
     return isinstance(v, (int, float)) and not isinstance(v, bool)
 
 
+def _is_finite_num(v):
+    return _is_num(v) and (not isinstance(v, float) or math.isfinite(v))
+
+
 def _fix(rule, value, default):
     """(value, problem?) for one field."""
     kind = rule[0]
@@ -332,7 +336,8 @@ def _fix(rule, value, default):
                     return allowed, False
         return default, True
     if kind == "res":
-        if isinstance(value, list) and len(value) == 2 and all(_is_num(n) and n >= 1 and n == int(n) for n in value):
+        if isinstance(value, list) and len(value) == 2 and all(
+                _is_finite_num(n) and n >= 1 and n == int(n) for n in value):
             return [int(value[0]), int(value[1])], False
         return list(default), True
     raise ValueError(rule)
@@ -500,7 +505,7 @@ def _parse_save(text):
     if not isinstance(env, dict) or env.get("format") != "save" or not isinstance(env.get("data"), dict):
         return None, "not a save"
     v = env.get("version")
-    if not _is_num(v) or v != int(v) or v < 1:
+    if not _is_finite_num(v) or v != int(v) or v < 1:
         return None, "bad version"
     if v > SAVE_VERSION:
         return None, "newer"
@@ -734,6 +739,8 @@ def build_shell():
         ("empty file", ""),
         ("not json", "{volume: loud"),
         ("an array", "[1, 2]"),
+        ("infinite resolution", '{"display": {"resolution": [Infinity, 720]}}'),
+        ("NaN resolution", '{"display": {"resolution": [NaN, 720]}}'),
         ("all defaults", json.dumps(DEFAULT_SETTINGS)),
         ("clamps and types", json.dumps({"audio": {"master": 1.5, "music": -0.2, "sfx": "loud", "mono": 1},
                                          "access": {"text_scale": 3, "difficulty": "nightmare",
@@ -784,10 +791,14 @@ def build_shell():
         "corrupt": '{"format": "save", "version": 3, "data": {"health": 5',
         "wrong": json.dumps({"format": "settings", "version": 1, "data": {}}),
         "badver": json.dumps({"format": "save", "version": "2", "data": {}}),
+        "infinite_version": '{"format": "save", "version": Infinity, "data": {}}',
+        "nan_version": '{"format": "save", "version": NaN, "data": {}}',
     }
     for name, p, b in [("current", "v3", None), ("migrate from 1", "v1", None), ("migrate from 2", "v2", "v1"),
                        ("corrupt falls back", "corrupt", "v2"), ("both bad", "corrupt", "wrong"),
                        ("newer is refused", "newer", "v3"), ("bad version type", "badver", None),
+                       ("infinite version is bad", "infinite_version", None),
+                       ("NaN version is bad", "nan_version", None),
                        ("nothing saved", None, None)]:
         env, source, problems = save_load(saves.get(p), saves.get(b))
         cases.append({"type": "save_load", "name": name, "primary": saves.get(p), "backup": saves.get(b),

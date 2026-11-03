@@ -1,5 +1,5 @@
 {
-  "kit_version": "0.8.2",
+  "kit_version": "0.8.3",
   "author": "the user",
   "profile": {
     "author": "",
@@ -1209,6 +1209,12 @@
       "date": "2026-11-01",
       "mode": "upgrade",
       "unmerged": []
+    },
+    {
+      "version": "0.8.3",
+      "date": "2026-11-02",
+      "mode": "upgrade",
+      "unmerged": []
     }
   ],
   "files": {
@@ -1251,7 +1257,7 @@
     "data/golden/audio.json": "8710aef4b74450509938fd36528c7613d47515b159afed9dfb6a3ff9bf10a9d2",
     "data/golden/juice.json": "0d3d1740580826938588633449103c1344d754b40ed695f320d586487dc4b8bb",
     "data/golden/music.json": "20474e9be333feac8bc1e41cce2906ac499b4efc7981570f872e1d97dce23fe9",
-    "data/golden/shell.json": "f0bfa335811a6eef79709b294c722162a5354d35a7f28692d8c68935c7ce8a34",
+    "data/golden/shell.json": "ce100f0be6961b93518ec14ce2abf4436e1870ebc843580b32ddf41cb4afdec6",
     "data/i18n/en.json": "3cd03d377f90e62551f87c6d1cebae0001c311d5a3ef5ece851ed8cc1255792a",
     "data/i18n/fr.json": "7a4f63eae4e70be4135afeac87c2b183d9992132c14eae0e49b8576c8492d3fe",
     "docs/ARCHITECTURE.md": "95d7ff920e194d81913ccda33832df06f862e7c4eea7b90702aabbda5e392a3d",
@@ -1565,7 +1571,7 @@
     "tools/dev.py": "1a449d0921b6217c1ea64fd396b05a8a79755e312050c1cf8b926e4ceb1f40a6",
     "tools/doctor.py": "2a66df7f8e6b252b94a11f38c66c27e02138887f264577821eadda2de1941acb",
     "tools/fetch_asset.py": "847704c718c36d9e861e3245ac186656f68fee53ea7d44e020302001c99bb854",
-    "tools/golden_vectors.py": "358bd41c476c96c4649e607f363eb6df3170d692778d50c1f24a27bb9c6c6ce4",
+    "tools/golden_vectors.py": "e38bee66919227f0ce34f8d5901b2646c1cc80b671b38692390e46b396e22fc4",
     "tools/hooks/session_context.py": "8b3e3734fcaeb5d0b97ba5350ff380e9758174c7c5afb162a5735e93f28b9133",
     "tools/image_diff.py": "e4aa63680093e09e8a48c48996c4a1fbc75404d72312ccb0faee7a7068abe430",
     "tools/issues.py": "bb8f2116b28d48a0ff1cbe65852c2525fafc7b344db16304fcee057d1c581587",
@@ -1576,7 +1582,7 @@
     "tools/test_check_links.py": "768e36f642e0f3bbbbf87a800095a51a9f5ea0353de240ed26fc88aa6633fff7",
     "tools/test_credits.py": "658632b9464bc769df0497a32b7018b8e9c063a4a0b10eb18d246bda1883b91e",
     "tools/test_fetch_asset.py": "90165358d5be5d8c1a71f6936cc666694c63e9b0cc7b75d1e697a4aa5891e331",
-    "tools/test_golden_vectors.py": "c1c34a9984dfde65e2d1c0d95c7a13226e00cc66085df9d0b7a9995d899f97fc",
+    "tools/test_golden_vectors.py": "f9ae32bdcbfdd03e46417bc552a390831556288301eee3c053d30e690655e793",
     "tools/test_image_diff.py": "0584beab2542496e4acd12f0365d304226897e18a77a0a76dffb7b54361ec11b",
     "tools/test_issues.py": "259047c45802fd775bc0a39b327135b2abd4e45a22a8d859fb5e9601acf5f1c4",
     "tools/test_publish_check.py": "7939685a5e6ca409092bebe7a2e080a57a32958cedb3e12f72f5d0da9fa207d1",
@@ -1586,5 +1592,5 @@
     "vite.config.ts": "f3cb804791cc8cf0770d6f49a5ec584ffd9f106c0d92973d6eaf07d8657451f5",
     "vitest.config.ts": "221ab6b0aa6ba1232bf861799552dea0ae4536538004d72f4eb6a2f28d507634"
   },
-  "last_upgrade": "2026-11-01"
+  "last_upgrade": "2026-11-02"
 }

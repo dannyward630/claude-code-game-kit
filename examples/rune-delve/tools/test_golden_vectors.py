@@ -114,6 +114,20 @@ class Shell(unittest.TestCase):
     def test_missing_file_is_defaults_without_problems(self):
         self.assertEqual(gv.settings_load(None), (gv.DEFAULT_SETTINGS, []))
 
+    def test_non_finite_resolution_uses_default_and_reports_one_problem(self):
+        for value in ("Infinity", "-Infinity", "NaN"):
+            with self.subTest(value=value):
+                text = '{"display":{"resolution":[' + value + ',720]}}'
+                settings, problems = gv.settings_load(text)
+                self.assertEqual(settings["display"]["resolution"], gv.DEFAULT_SETTINGS["display"]["resolution"])
+                self.assertEqual(problems, ["display.resolution"])
+
+    def test_non_finite_save_versions_are_bad_versions(self):
+        for value in ("Infinity", "-Infinity", "NaN"):
+            with self.subTest(value=value):
+                text = '{"format":"save","version":' + value + ',"data":{}}'
+                self.assertEqual(gv._parse_save(text), (None, "bad version"))
+
     def test_rebind_swap_keeps_every_binding_once_per_group(self):
         out, conflicts = gv.rebind(gv.DEFAULT_BINDINGS, "jump", 0, "key:j")
         self.assertEqual(conflicts, [["attack", 0]])
